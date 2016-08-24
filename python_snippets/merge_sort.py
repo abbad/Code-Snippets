@@ -3,7 +3,7 @@
     I learned and implemented this function during an Algorithms and Data structures course at my university.
     I rewrote it for fun.
 
-    Merge sort is a divide and conquer algorithm. It will make this list into a smaller lists by calling it self in recursion and then
+    Merge sort is a divide and conquer algorithm. It will make this list into a smaller lists by calling itself in recursove technique.
 """
 
 
