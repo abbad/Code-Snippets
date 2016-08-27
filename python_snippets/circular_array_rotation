@@ -27,6 +27,7 @@ array = list()
 for x in array_2:
     array.append(int(x))
 
+# Rotate items. 
 for x in range(k_times):
     # Take the last element in the array and push it to the beginning of the array. 
     last_element = array[-1]
