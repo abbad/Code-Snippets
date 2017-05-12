@@ -1,9 +1,10 @@
 """ 
     Merge sort function.
-    I learned and implemented this function during an Algorithms and Data structures course at my university.
-    I rewrote it for fun.
+    I learned and implemented this function during algorithms and data structures course. 
+    I wrote this fun fun :)
 
-    Merge sort is a divide and conquer algorithm. It will make this list into a smaller lists by calling it self in recursion and then
+    Merge sort is a divide and conquer algorithm. It will make this list into a smaller 
+    lists by calling itself in recursove technique.
 """
 
 
@@ -12,7 +13,7 @@ def merge_sort(merge_list):
     if len(merge_list) <= 1:
         return merge_list
 
-    middle = len(merge_list) // 2 # This is floor division. why not to use a noraml division?
+    middle = len(merge_list) // 2
 
     right_list = merge_sort(merge_list[middle:])
     left_list =  merge_sort(merge_list[:middle])
