@@ -4,7 +4,7 @@
     I wrote this fun fun :)
 
     Merge sort is a divide and conquer algorithm. It will make this list into a smaller 
-    lists by calling itself in recursove technique.
+    lists by calling itself in recursively.
 """
 
 
@@ -34,7 +34,6 @@ def merge(right_list, left_list):
             result.append(right_list[r_idx])
             r_idx += 1
 
-
     if len(right_list) > 0:
         result.extend(right_list[r_idx:])
 
@@ -44,7 +43,4 @@ def merge(right_list, left_list):
     return result
 
 if __name__ == "__main__":
-
-    # print merge_sort([2,1,3,5,-1])
-
-	print merge([3,2,1], [7, 6, 5])
+	print(merge([3,2,1], [7, 6, 5]))

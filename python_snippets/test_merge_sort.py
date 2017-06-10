@@ -1,6 +1,8 @@
 from merge_sort import merge_sort
 from unittest import TestCase, main
 import random
+
+
 class TestStringCompression(TestCase):
 	
 	def test_merge_sort_empty_array(self):
