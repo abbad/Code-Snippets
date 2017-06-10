@@ -6,8 +6,6 @@
     Find the largest palindrome made from the product of two 3-digit numbers.
 
 """
-
-
 def find_largest_palindrome():
     array_list = list()
     for x in range(1,999):
@@ -28,7 +26,7 @@ def find_largest_palindrome():
 def is_palindrome(number):
     str_number = str(number)
     length = len(str_number) - 1
-    for char in str_number[:len(str_number)/2]:
+    for char in str_number[:len(str_number)//2]:
         if char == str_number[length]:
             length -= 1
         else:
@@ -37,4 +35,4 @@ def is_palindrome(number):
     return True
 
 if __name__ == "__main__":
-    print find_largest_palindrome()
+    print(find_largest_palindrome())
