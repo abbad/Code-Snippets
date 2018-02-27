@@ -1,10 +1,10 @@
 # TODO: Use dynamic programming.
-def fibonnaci(number):
+def fibonacci(number):
     if number == 1:
         return 1
     if number == 0:
         return 0
-    return fibonnaci(number - 1) + fibonnaci(number - 2)
+    return fibonacci(number - 1) + fibonacci(number - 2)
 
 if __name__ == '__main__':
-    print(fibonnaci(7))
+    print(fibonacci(7))
