@@ -16,9 +16,6 @@ def print_longest(list_of_words):
         if can_build_word(words_dict, word, True):
             print(word)
 
-    print('None')
-
-
 def can_build_word(words_dict, word, is_original):
     # Check if word is in the dictionary and its not original.
     if word in words_dict.keys() and not is_original:
