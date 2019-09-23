@@ -56,6 +56,6 @@ docs/_build/
 # PyBuilder
 target/
 
-#Pycharm project files.
-.idea
-
+#Pycharm project fiidea
+.idea/
+venv/*

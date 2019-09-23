@@ -6,7 +6,7 @@ replaced by a count of the repetitions.
  "sssssTTTTTTops" ? "s5T6ops" 
 """
  
- 
+
 def compress_string(string):
     """
     :param string:
@@ -28,3 +28,31 @@ def compress_string(string):
         result += str(count)
 
     return result
+
+def compress_string_with_dict(str):
+    """
+    different solution.
+    """
+    count_keeper = {}
+
+    for char in str:
+        if char in count_keeper:
+            count_keeper[char] += 1
+        else:
+            count_keeper[char] = 1
+
+    result = ''
+
+    for key in count_keeper:
+        result += f"{key}{count_keeper[key]}"
+
+    if len(result) > len(str):
+        return str
+    return result
+
+
+assert compress_string('aaa') == 'a3'
+assert compress_string('aaaabc') == 'a4b1c1'
+
+assert compress_string('abc') == 'abc'
+
