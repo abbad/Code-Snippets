@@ -10,7 +10,48 @@ class Node(object):
 
   def __repr__(self):
       return f"current: { str(self.value)}"
-    
+
+ru = LRUCache2(3)
+lru.put(1, 101)
+lru.put(2, 102)
+lru.put(3, 103)
+lru.print_values()
+
+lru.put(4, 104)
+lru.print_values()
+
+assert lru.get(1) == -1
+
+lru.print_values()
+
+assert lru.get(2) == 102
+lru.print_values()
+
+
+assert lru.get(3) == 103
+
+
+assert lru.get(1) == -1
+lru.print_values()
+
+lru.put(4, 104)
+lru.print_values()
+
+assert len(lru.cache) == 3
+assert lru.get(4) == 104
+
+# # This tests that the oldest used value is being dropped
+assert lru.get(1) == -1
+
+
+# # This tests that when you write a new value you are putting it back to the top of the cache
+lru.put(2, 112)
+lru.put(5, 105)
+assert lru.get(2) == 112
+assert lru.get(4) == 104
+assert lru.get(5) == 105
+
+print("Success
     
 # Solution 1: Using a doubly linked list.
 class LRUCache3:
@@ -89,13 +130,9 @@ class LRUCache3:
   def print_values(self):
     pointer_node = self.tail  
     
-    count = 0 
     while (pointer_node):  
       print(pointer_node)      
 
-      count += 1 
-      if count == 4:
-        break
       pointer_node = pointer_node.next_node
     
     print('end of printing')
@@ -173,4 +210,4 @@ assert lru.get(2) == 112
 assert lru.get(4) == 104
 assert lru.get(5) == 105
 
-print("Success 123")
+print("Success")
