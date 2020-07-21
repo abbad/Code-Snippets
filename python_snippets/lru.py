@@ -51,7 +51,7 @@ assert lru.get(2) == 112
 assert lru.get(4) == 104
 assert lru.get(5) == 105
 
-print("Success
+print("Success")
     
 # Solution 1: Using a doubly linked list.
 class LRUCache3:
