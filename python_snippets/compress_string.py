@@ -29,6 +29,7 @@ def compress_string(string):
 
     return result
 
+
 def compress_string_with_dict(str):
     """
     different solution.
@@ -44,7 +45,10 @@ def compress_string_with_dict(str):
     result = ''
 
     for key in count_keeper:
-        result += f"{key}{count_keeper[key]}"
+        if count_keeper[key] == 1:
+            result = f"{result}{key}"  
+        else:
+            result = f"{result}{key}{count_keeper[key]}"
 
     if len(result) > len(str):
         return str

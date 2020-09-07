@@ -15,10 +15,13 @@ def merge_sort(merge_list):
 
     middle = len(merge_list) // 2
 
+    # The divide part.
     right_list = merge_sort(merge_list[middle:])
-    left_list =  merge_sort(merge_list[:middle])
+    left_list = merge_sort(merge_list[:middle])
 
+    # The merging part.
     return merge(right_list, left_list)
+
 
 def merge(right_list, left_list):
     result = []
@@ -43,4 +46,4 @@ def merge(right_list, left_list):
     return result
 
 if __name__ == "__main__":
-	print(merge([3,2,1], [7, 6, 5]))
+	print(merge_sort([3,2,1, 7, 6, 5]))

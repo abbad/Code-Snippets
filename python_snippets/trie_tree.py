@@ -1,87 +1,121 @@
-"""
-    Trying to create my own trie structure here.
-"""
-
-class Node(object):
-    def __init__(self):
-        self.word = None
-        self.nodes = {}
-
-    def insert(self, word, position=0):
-        # Check if word in self.
-        char = word[position]
-        if char not in self.nodes:
-            # add to dictionary and create a new node.
-            self.nodes[char] = Node()
-
-        # Base case for the iteration.
-        if position + 1 == len(word):
-            self.nodes[char].word = word
-            return True
-
-        self.nodes[char].insert(word, position+1)
-
-    def __get_all__(self):
-        result = []
-
-        # Iterate over and get all the words that are inside our trie.
-
-        for key, value in self.nodes.items():
-            result.extend(value.__get_all__())
-
-        if self.word:
-            result.append(self.word)
-            return result
-
-        return result
-
-    def __get_words_by_prefix__(self, prefix, position):
-        # Start looking until you find the prefix. and then iterate over its children and check for words.
-        result = []
-        if position < len(prefix):
-            for key, val in self.nodes.items():
-                current_letter = prefix[position]
-                if key == current_letter:
-                    print(key, val)
-                    result += self.nodes[key].__get_words_by_prefix__(prefix, position + 1)
-        else:
-            for key, val in self.nodes.items():
-                result += self.nodes[key].__get_words_by_prefix__(prefix, position + 1)
-            if self.word:
-                result.append(self.word)
-
-        return result
-
+# I wonder if make this a child of a dictionary is more elegant.
+class Node:
+    
+    def __init__(self, key, children=None):
+        
+        self.key = key
+        # I had this as a list, but changed it to dictionary.
+        # having it as a set made it hard to hash.
+        self.children = children or {}
+        self.is_word = False
+        
+    def __eq__(self, other):
+        return other == self.key
+    
     def __repr__(self):
-        return str(self.word)
+        return str(self.key)
 
 
-class Trie(object):
+class Trie:
+
     def __init__(self):
-        self.root = Node()
+        """
+        Initialize your data structure here.
+        """
+        self.start = Node('*')
 
-    def insert(self, word):
-        self.root.insert(word, 0)
+    def insert(self, word: str) -> None:
+        """
+        Inserts a word into the trie.
+        """
+        node = self.start
+        current_keys = self.start.children
+        
+        for char in word: 
+            if char not in current_keys:
+                node = Node(char)
+                current_keys[char] = node
+                current_keys = node.children
+                node = node
+            else:
+                node = current_keys[char]
+                current_keys = node.children
 
-    def get_all(self):
-        return self.root.__get_all__()
+        node.is_word = True
 
-    def get_all_with_prefix(self, prefix):
-        return self.root.__get_words_by_prefix__(prefix, 0)
+    def search(self, word: str, start_node=None) -> bool:
+        """
+        Returns if the word is in the trie, also supports wild card .
+        """
+        node = start_node or self.start
+        children = node.children
+        
+        for index, char in enumerate(word): 
+            # this is how I implemented it,
+            # if there was a dot, skip this iteration
+            # and go after all the children of the current child.
+            if char == '.':
+                for key, child in children.items():
+                    if word[index+1:] == '':
+                        return True
+
+                    if self.search(word[index+1:], child):
+                        return True
+            elif char in children:
+                node = children[char]
+                children = node.children
+            else:
+                return False
+
+        if node.is_word:
+            return True
+        else:
+            return False
+
+    def startsWith(self, prefix: str) -> bool:
+        """
+        Returns if there is any word in the trie that starts with the given prefix.
+        """
+        children = self.start.children
+        node = self.start
+        for char in prefix: 
+          
+            if char in children:
+                node = children[char]
+                children = node.children
+            else:
+                return False
+
+        return True
 
 
-if __name__ == '__main__':
-    # Create the trie and insert some words then do some tests
-    trie = Trie()
-    trie.insert("go")
-    trie.insert("gone")
-    trie.insert("gi")
-    trie.insert("cool") 
-    trie.insert("comb")
-    trie.insert("grasshopper")
-    trie.insert("home")
-    trie.insert("hope")
-    trie.insert("hose")
+def traverse_trie(trie):
+    if not trie:
+        return
 
-    print(trie.get_all_with_prefix("gra"))
-    # print("\n")
+    where_are_we = [trie]
+  
+    while(where_are_we):
+
+        val = where_are_we.pop()
+
+        for item, node in val.children.items():
+            print('key ' + str(item) + ' is_word ' + str(node.is_word) , end=' ')
+            where_are_we.append(node)
+
+    print()
+
+
+t = Trie()
+
+t.insert('abc')
+t.insert('allen')
+traverse_trie(t.start)
+
+# t.insert('tony')
+
+print(t.search('a'))
+
+print(t.startsWith('allenx'))
+
+

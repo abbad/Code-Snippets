@@ -21,6 +21,7 @@
 from collections import namedtuple, OrderedDict
 User = namedtuple('User', 'name debt')
 
+
 class Books(object):
 
   def __init__(self, users):

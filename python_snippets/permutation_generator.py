@@ -1,27 +1,26 @@
 
-def generate(string, start, end):
-    result = []
-    if start == end - 1:
-        if string not in result:
-            return [string]
-    else:
-        for current in range(start, end):
-            x = list(string)
-            # Swap values.
-            temp = x[start]
-            x[start] = x[current]
-            x[current] = temp
-            # Call generate function again.
-            result += generate(''.join(x), start + 1, end)
-            # Swap values again.
-            temp = x[start]
-            x[start] = x[current]
-            x[current] = temp
-    return result
+
+def generate_perm(string, step, result):
+
+    if step == len(string):
+        print(string)
+        result.append(string)
+        return
+    for index in range(step, len(string)):
+
+        # swap parts item at index with item at step
+        string = list(string)
+        string[step], string[index] = string[index], string[step]
+
+        string = "".join(string)
+
+        generate_perm(string, step + 1, result)
+
 
 # ['abc', 'acb', 'bac', 'bca', 'cba', 'cab']
-# ['abc', 'acb', 'bac', 'bca', 'cba', 'cab']
+# ['abc', 'acb', 'bac', 'bca', 'cab', 'cba']
 
 if __name__ == '__main__':
-    result = generate('aac', 0, 3)
-    print(result)
+    perms = []
+    generate_perm('abcd', 0, perms)
+    print(perms)
